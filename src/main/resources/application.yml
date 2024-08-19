@@ -17,6 +17,12 @@ spring:
       dialect: org.hibernate.dialect.MySQLDialect
     show-sql: true
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 30MB
+
 logging:
   level:
     root: INFO
