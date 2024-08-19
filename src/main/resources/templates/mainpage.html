@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mainpage</title>
+</head>
+<body>
+<button id="uploadButton">파일 올리기</button>
+<button onclick="location.href='/rec'">새로 녹음하기</button>
+<input type="file" id="fileInput" accept="audio/mp3" style="display: none;">
+<input type="text" id="filePath" placeholder="선택한 파일 이름" style="width: 300px;" readonly>
+
+<script>
+    document.getElementById('uploadButton').onclick = () => {
+        document.getElementById('fileInput').click(); // 파일 선택 창 열기
+    };
+
+    document.getElementById('fileInput').onchange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            document.getElementById('filePath').value = file.name; // 파일 이름을 input 필드에 출력
+
+            // 파일 전송을 위한 AJAX 요청
+            const formData = new FormData();
+            formData.append('audio', file); // 'audio'라는 이름으로 파일 추가
+
+            fetch('/fileupload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('서버 응답:', data); // 서버 응답 처리
+                })
+                .catch(error => {
+                    console.error('파일 업로드 중 오류 발생:', error);
+                });
+        }
+    };
+</script>
+</body>
+</html>
