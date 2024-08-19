@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>시작 화면</title>
+    <link rel="stylesheet" th:href="@{/styles/css/main.css}" />
+</head>
+<header>
+    <a th:href="@{/main}">CLOVER</a>
+</header>
+<body>
+    <div class="bodyContent">
+        <h1>따분한 수업을 쉽게 바꿔보세요 !</h1>
+        <div class="fileTypes">
+            <div class="fileType">
+                <h2>음성 녹음 파일</h2>
+                <p>녹음 파일을 첨부하여 쉽게 공부해 보세요 !</p>
+                <a th:href="@{/voice}"><button class="fileButtton">녹음 파일 첨부하기</button></a>
+            </div>
+            <div class="fileType">
+                <h2>텍스트 파일</h2>
+                <p>긴 텍스트를 삽입하여 쉽게 공부해 보세요 !</p>
+                <a th:href="@{/file}"><button class="fileButtton">텍스트 파일 첨부하기</button></a>
+            </div>
+            <div class="fileType">
+                <h2>이미지 파일</h2>
+                <p>이미지 파일을 다양한 형태로 바꿔 공부해보세요 !</p>
+                <a th:href="@{/file}"><button class="fileButtton">이미지 파일 첨부하기</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

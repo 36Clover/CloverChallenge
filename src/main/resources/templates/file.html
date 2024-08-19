@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>파일 첨부하기</title>
+    <link rel="stylesheet" th:href="@{/styles/css/main.css}" />
+</head>
+<body>
+    <div class="bodyContents">
+        <div class="fileContent">
+        <input type="file">
+        <a th:href="@{/all}"><button class="fileButtton" type="submit">파일 제출 완료</button></a>
+        </div>
+        <div class="fileContent">
+            <div>
+                그래프 삽입
+            </div>
+            <div>
+            <a th:href="@{/all}"><button class="fileButtton" type="submit">요점 정리하기</button></a>
+            <a th:href="@{/all}"><button class="fileButtton" type="submit">기출 문제 생성하기</button></a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
