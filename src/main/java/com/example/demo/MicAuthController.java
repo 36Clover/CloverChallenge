@@ -13,7 +13,12 @@ import java.util.UUID;
 @Controller
 public class MicAuthController {
 
-    @GetMapping("/")
+    @GetMapping("/mainpage")
+    public String mainPage(){
+        return "mainpage"; // 템플릿 반환
+    }
+
+    @GetMapping("/rec")
     public String micAuth(){
         return "micauth";
     }

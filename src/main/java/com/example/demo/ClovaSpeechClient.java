@@ -12,8 +12,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
@@ -266,21 +270,5 @@ public class ClovaSpeechClient {
     }
 
 
-    public static void main(String[] args) {
-        final ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient();
-        NestRequestEntity requestEntity = new NestRequestEntity();
-        final String result =  clovaSpeechClient.upload(new File("C:\\Users\\mdk19\\Desktop\\test.mp3"), requestEntity);
-        //final String result = clovaSpeechClient.url("file URL", requestEntity);
-        //final String result = clovaSpeechClient.objectStorage("test.mp3", requestEntity);
-        System.out.println(result);
 
-    }
-    public String pa_json() {
-        final ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient();
-        NestRequestEntity requestEntity = new NestRequestEntity();
-        final String result =  clovaSpeechClient.upload(new File("C:\\Users\\mdk19\\Desktop\\test5.mp3"), requestEntity);
-        //final String result = clovaSpeechClient.url("file URL", requestEntity);
-        //final String result = clovaSpeechClient.objectStorage("test.mp3", requestEntity);
-        return result;
-    }
 }
