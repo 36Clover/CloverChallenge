@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.gpt_method;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

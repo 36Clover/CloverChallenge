@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.gpt_method;
 
 import java.io.File;
 import java.io.IOException;
