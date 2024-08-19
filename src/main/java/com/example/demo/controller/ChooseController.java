@@ -12,6 +12,8 @@ import java.io.IOException;
 @RestController
 public class ChooseController {
 
+    String result = "";
+
     @RequestMapping(value = "/fileupload", method = RequestMethod.POST)
     public ResponseEntity<String> uploadAudio(@RequestParam("audio") MultipartFile file) {
         // 파일 저장 경로
@@ -27,7 +29,7 @@ public class ChooseController {
 //        }
 
         // pa_json 메서드 호출
-        String result = pa_json(filePath);
+        result = pa_json(filePath);
         return ResponseEntity.ok(result); // JSON 응답 반환
     }
 
@@ -37,6 +39,11 @@ public class ChooseController {
 
         // filePath를 사용하여 파일 업로드
         final String result = clovaSpeechClient.upload(new File(filePath), requestEntity);
+        return result;
+    }
+
+    public String pa_json2(){
+
         return result;
     }
 
