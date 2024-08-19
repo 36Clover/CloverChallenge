@@ -27,7 +27,3 @@ logging:
   level:
     root: INFO
 
-openai:
-  api-url: https://api.openai.com/v1/chat/completions
-  api-key: sk-Qj0JvbXL0ZeNKc7yzs0OK9zUO9F6NU8msdNLZ3gkKyT3BlbkFJdhBpeNfDKY346JM86Scb8oEPsyeC4hG5VM-dsCWNQA
-  model: gpt-4
