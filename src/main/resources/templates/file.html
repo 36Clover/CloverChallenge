@@ -8,12 +8,14 @@
 <body>
     <div class="bodyContents">
         <div class="fileContent">
-        <input type="file">
-        <a th:href="@{/all}"><button class="fileButtton" type="submit">파일 제출 완료</button></a>
+            <input type="file" id="fileInput" accept="audio/mp3" style="display: none;">
+            <input type="text" id="filePath" placeholder="선택한 파일 이름" style="width: 300px;" readonly>
+<!--            <div id="result" style="margin-top: 20px;"></div> &lt;!&ndash; 결과를 표시할 영역 추가 &ndash;&gt;-->
+            <a><button id="uploadButton" class="fileButtton" type="submit">파일 제출 하기</button></a>
         </div>
         <div class="fileContent">
             <div>
-                그래프 삽입
+                <p id="sometxt">그래프 삽입</p>
             </div>
             <div>
             <a th:href="@{/all}"><button class="fileButtton" type="submit">요점 정리하기</button></a>
@@ -21,6 +23,37 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('uploadButton').onclick = () => {
+            document.getElementById('fileInput').click(); // 파일 선택 창 열기
+        };
+
+        document.getElementById('fileInput').onchange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('filePath').value = file.name; // 파일 이름을 input 필드에 출력
+
+                // 파일 전송을 위한 AJAX 요청
+                const formData = new FormData();
+                formData.append('audio', file); // 'audio'라는 이름으로 파일 추가
+
+                fetch('/fileupload', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json()) // JSON으로 응답 처리
+                    .then(data => {
+                        // 서버 응답에서 텍스트 통합
+                        const resultText = data.map(segment => `${segment.speaker}: ${segment.text}`).join('<br>');
+                        document.getElementById('result').innerHTML = resultText; // 결과 표시
+                    })
+                    .catch(error => {
+                        console.error('파일 업로드 중 오류 발생:', error);
+                    });
+            }
+        };
+    </script>
 
 </body>
 </html>
