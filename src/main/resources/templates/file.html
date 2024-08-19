@@ -8,16 +8,21 @@
 <body>
     <div class="bodyContents">
         <div class="fileContent">
-        <input type="file">
-        <a th:href="@{/all}"><button class="fileButtton" type="submit">파일 제출 완료</button></a>
+            <form action="/result" method="post" enctype="multipart/form-data">
+                <input type="file" name="recording" multiple>
+                <br>
+                <br>
+                <button type="submit" class="fileButtton">제출 완료</button>
+               <!-- <a th:href="@{/all}"><button class="fileButtton" type="submit">파일 제출 완료</button></a>-->
+            </form>
         </div>
         <div class="fileContent">
             <div>
                 그래프 삽입
             </div>
             <div>
-            <a th:href="@{/all}"><button class="fileButtton" type="submit">요점 정리하기</button></a>
-            <a th:href="@{/all}"><button class="fileButtton" type="submit">기출 문제 생성하기</button></a>
+                <a th:href="@{/result}"><button class="fileButtton" type="submit">요점 정리하기</button></a>
+                <a th:href="@{/quize}"><button class="fileButtton" type="submit">기출 문제 생성하기</button></a>
             </div>
         </div>
     </div>

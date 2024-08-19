@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -26,6 +27,9 @@ public class MakeQuestion {
             // 텍스트를 처리하여 답변을 추출
             answer = getAnswer(textToProcess);
 
+            // 추출한 문제들을 텍스트 파일로 저장
+            saveQuestionsToFile(answer, "qa-list.txt");
+
 
         } catch (Exception e) {
             e.printStackTrace();  // 예외 발생 시 스택 트레이스를 출력합니다.
@@ -34,6 +38,27 @@ public class MakeQuestion {
         return answer;
     }
 
+
+    // 추출한 문제들을 텍스트 파일로 저장하는 메소드
+    private void saveQuestionsToFile(String jsonContent, String fileName) {
+        try {
+            // JSON 문자열 파싱
+            JsonNode contentNode = new ObjectMapper().readTree(jsonContent);
+
+            // 텍스트 파일 작성
+            try (FileWriter fileWriter = new FileWriter(fileName)) {
+                for (JsonNode node : contentNode) {
+                    String question = node.path("question").asText();
+                    String answer = node.path("answer").asText();
+                    fileWriter.write("Question: " + question + "\n");
+                    fileWriter.write("Answer: " + answer + "\n\n");
+                }
+            }
+            System.out.println("Questions and answers have been written to " + fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     // 텍스트를 처리하여 답변을 얻는 메소드
     private static String getAnswer(String text) throws Exception {
         // 답변을 얻기 위한 프롬프트 작성
