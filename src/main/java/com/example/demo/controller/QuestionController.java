@@ -16,7 +16,7 @@ public class QuestionController {
 
     private final MakeQuestion makeQuestionService = new MakeQuestion();  // 서비스 인스턴스 생성
 
-    String summary= "\n" +
+    String data= "\n" +
             "네트워크의 7계층 모델은 OSI(Open Systems Interconnection) 모델을 말합니다. 이 모델은 컴퓨터 네트워킹의 구조를 설명하기 위해 설계된 7개의 계층으로 나뉩니다. 각 계층은 네트워크 통신의 특정 기능을 담당하며, 계층 간의 상호작용을 통해 데이터가 네트워크를 통해 전달됩니다. 각 계층은 다음과 같습니다:\n" +
             "\n" +
             "물리 계층 (Physical Layer): 전기적, 기계적, 절차적, 기능적 특성을 정의하여 데이터의 물리적 전송을 담당합니다. 예를 들어, 케이블, 스위치, 허브 등의 장비가 여기에 해당합니다.\n" +
@@ -28,7 +28,7 @@ public class QuestionController {
     @GetMapping
     public String showQuestions(Model model) {
         // MakeQuestion 서비스 호출
-        List<Map<String, String>> questions = makeQuestionService.make_question(summary);
+        List<Map<String, String>> questions = makeQuestionService.make_question(data);
 
         System.out.println(questions);
 

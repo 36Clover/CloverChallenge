@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>기출 문제</title>
-    <link rel="stylesheet" th:href="@{/styles/css/main.css}" />
+    <link rel="stylesheet" href="/styles/css/main.css" />
     <script>
         function toggleAnswers() {
             var answers = document.querySelectorAll('.answer');
@@ -15,23 +15,21 @@
 </head>
 <body>
 <div class="bodyContent">
-    <h1>기출 문제를 풀어보세요 !</h1>
-    <p>기출 내용</p>
-    <div>
-        <div class="quizeButton">
-            <button class="fileButtton" type="submit">기출 문제 복사하기</button>
-            <button class="fileButtton" type="button" onclick="toggleAnswers()">정답 보기</button>
-        </div>
-        <div class="questions">
-            <ul>
-                <li th:each="item : ${questions}">
-                    <div>
-                        <p th:text="${item.question}"></p>
-                        <p class="answer" style="display:none;" th:text="${item.answer}"></p>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <h1 class="mainTitle">기출 문제를 풀어보세요 !</h1>
+    <p class="introText">기출 내용</p>
+    <div class="buttonContainer">
+        <button class="fileButton" type="submit">기출 문제 복사하기</button>
+        <button class="fileButton" type="button" onclick="toggleAnswers()">정답 보기</button>
+    </div>
+    <div class="questionsContainer">
+        <ul class="questionsList">
+            <li th:each="item : ${questions}" class="questionItem">
+                <div class="questionWrapper">
+                    <p class="questionText" th:text="${item.question}"></p>
+                    <p class="answer" style="display:none;" th:text="${item.answer}"></p>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
