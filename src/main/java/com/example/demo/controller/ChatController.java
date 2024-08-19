@@ -79,6 +79,7 @@ public class ChatController {
             sb.append("\n");
         }
         return sb.toString().getBytes();
+
     }
 }
 

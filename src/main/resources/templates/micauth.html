@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음성 녹음</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js"></script>
+</head>
+<body>
+<h1>음성 녹음 테스트</h1>
+<button id="startButton">녹음 시작</button>
+<button id="stopButton" disabled>녹음 중지</button>
+<audio id="audioPlayback" controls></audio>
+<form id="uploadForm" style="display: none;">
+    <input type="file" id="audioFile" name="audio" accept="audio/*">
+    <button type="submit">저장하기</button>
+</form>
+
+<script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    document.getElementById('startButton').onclick = async () => {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+
+        mediaRecorder.ondataavailable = event => {
+            audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = async () => {
+            const audioBlob = new Blob(audioChunks);
+            const audioURL = URL.createObjectURL(audioBlob);
+            document.getElementById('audioPlayback').src = audioURL;
+
+            // WAV Blob을 MP3로 변환
+            const mp3Blob = await convertToMP3(audioBlob);
+            const file = new File([mp3Blob], 'recording.mp3', { type: 'audio/mp3' });
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            document.getElementById('audioFile').files = dataTransfer.files;
+
+            // 업로드 폼 보이기
+            document.getElementById('uploadForm').style.display = 'block';
+        };
+
+        document.getElementById('stopButton').disabled = false;
+        document.getElementById('startButton').disabled = true;
+    };
+
+    document.getElementById('stopButton').onclick = () => {
+        mediaRecorder.stop();
+        document.getElementById('stopButton').disabled = true;
+        document.getElementById('startButton').disabled = false;
+    };
+
+    document.getElementById('uploadForm').onsubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(uploadForm);
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.text();
+        console.log(result); // 서버 응답 확인
+    };
+
+    async function convertToMP3(audioBlob) {
+        const arrayBuffer = await audioBlob.arrayBuffer();
+        const wav = new Uint8Array(arrayBuffer);
+        const mp3Encoder = new lamejs.Mp3Encoder(1, 44100, 128); // 모노, 44100Hz, 128kbps
+        const mp3Data = [];
+
+        const samples = new Int16Array(wav.buffer);
+        let remaining = samples.length;
+
+        for (let i = 0; remaining >= 1152; i += 1152) {
+            const mp3buf = mp3Encoder.encodeBuffer(samples.subarray(i, i + 1152));
+            if (mp3buf.length > 0) {
+                mp3Data.push(mp3buf);
+            }
+            remaining -= 1152;
+        }
+
+        const mp3buf = mp3Encoder.flush(); // 남은 데이터 플러시
+        if (mp3buf.length > 0) {
+            mp3Data.push(mp3buf);
+        }
+
+        return new Blob(mp3Data, { type: 'audio/mp3' });
+    }
+</script>
+</body>
+</html>
