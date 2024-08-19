@@ -6,9 +6,9 @@ spring:
     cache: false
 
   datasource:
-    url: jdbc:mysql://3.35.227.202:3306/surfer
-    username: clover
-    password: clover
+    url: jdbc:mysql://cloverdb.cbe4g42wmxst.ap-northeast-2.rds.amazonaws.com:3306/surfer
+    username: cloverdb
+    password: cloverdb
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

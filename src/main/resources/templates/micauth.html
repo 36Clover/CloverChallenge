@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음성 녹음</title>
+</head>
+<body>
+<h1>음성 녹음 테스트</h1>
+<button id="startButton">녹음 시작</button>
+<button id="stopButton" disabled>녹음 중지</button>
+<audio id="audioPlayback" controls></audio>
+<form id="uploadForm" style="display: none;">
+    <input type="file" id="audioFile" name="audio" accept="audio/*">
+    <button type="submit">저장하기</button>
+</form>
+
+<script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    document.getElementById('startButton').onclick = async () => {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+
+        mediaRecorder.ondataavailable = event => {
+            audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+            const audioBlob = new Blob(audioChunks);
+            const audioURL = URL.createObjectURL(audioBlob);
+            document.getElementById('audioPlayback').src = audioURL;
+
+            // Blob을 파일로 변환
+            const file = new File([audioBlob], 'recording.wav', { type: 'audio/wav' });
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            document.getElementById('audioFile').files = dataTransfer.files;
+
+            // 업로드 폼 보이기
+            document.getElementById('uploadForm').style.display = 'block';
+        };
+
+        document.getElementById('stopButton').disabled = false;
+        document.getElementById('startButton').disabled = true;
+    };
+
+    document.getElementById('stopButton').onclick = () => {
+        mediaRecorder.stop();
+        document.getElementById('stopButton').disabled = true;
+        document.getElementById('startButton').disabled = false;
+    };
+
+    document.getElementById('uploadForm').onsubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(uploadForm);
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.text();
+        console.log(result); // 서버 응답 확인
+    };
+</script>
+</body>
+</html>
