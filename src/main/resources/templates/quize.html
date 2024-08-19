@@ -7,17 +7,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Poor+Story&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/styles/css/main.css}" />
+    <link rel="stylesheet" href="/styles/css/main.css" />
+    <script>
+        function toggleAnswers() {
+            var answers = document.querySelectorAll('.answer');
+            answers.forEach(function(answer) {
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+    </script>
 </head>
 <body>
-    <div class="bodyContent">
-        <h1>기출 문제를 풀어보세요 !</h1>
-        <p>기출 내용</p>
-        <div>
-            <div class="quizeButton">
-            <button class="fileButtton" type="submit">기출 문제 복사하기</button>
-            <button class="fileButtton" type="submit">정답 보기</button>
-            </div>
-            </div>
+<div class="bodyContent">
+    <h1 class="mainTitle">기출 문제를 풀어보세요 !</h1>
+    <p class="introText">기출 내용</p>
+    <div class="buttonContainer">
+        <button class="fileButton" type="submit">기출 문제 복사하기</button>
+        <button class="fileButton" type="button" onclick="toggleAnswers()">정답 보기</button>
     </div>
+    <div class="questionsContainer">
+        <ul class="questionsList">
+            <li th:each="item : ${questions}" class="questionItem">
+                <div class="questionWrapper">
+                    <p class="questionText" th:text="${item.question}"></p>
+                    <p class="answer" style="display:none;" th:text="${item.answer}"></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>
