@@ -6,24 +6,36 @@
     <link rel="stylesheet" th:href="@{/styles/css/main.css}" />
 </head>
 <body>
-    <div class="bodyContent">
-        <h1>결과 값을 복사해 보세요 !</h1>
-        <div class="resultContents">
-            <div class="resultContent">
-                <h1>텍스트 파일</h1>
-                <p>요점된 텍스트 파일 내용</p>
-                <div>
-                    <button class="fileButtton">텍스트 내용 복사하기</button>
-                </div>
+<div class="bodyContent">
+    <h1>결과 값을 복사해 보세요 !</h1>
+    <div class="resultContents">
+        <div class="resultContent">
+            <h1>텍스트 파일</h1>
+            <p th:text="${summarizedText}">요점된 텍스트 파일 내용</p>
+            <div>
+                <button class="fileButtton" onclick="copyToClipboard('textContent')">텍스트 내용 복사하기</button>
             </div>
-            <div class="resultContent">
-                <h1>점자 파일</h1>
-                <p>요점 정리된 점자파일 내용</p>
-                <div>
-                    <button class="fileButtton">점자 코드 복사하기</button>
-                </div>
+        </div>
+        <div class="resultContent">
+            <h1>점자 파일</h1>
+            <p th:text="${brailleText}">요점 정리된 점자파일 내용</p>
+            <div>
+                <button class="fileButtton" onclick="copyToClipboard('brailleContent')">점자 코드 복사하기</button>
             </div>
         </div>
     </div>
+</div>
+<script>
+    function copyToClipboard(elementId) {
+        const el = document.getElementById(elementId);
+        navigator.clipboard.writeText(el.innerText)
+            .then(() => {
+                alert('복사되었습니다!');
+            })
+            .catch(err => {
+                alert('복사에 실패했습니다: ' + err);
+            });
+    }
+</script>
 </body>
 </html>

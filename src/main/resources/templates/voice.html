@@ -13,7 +13,7 @@
             <p>미리 녹음한 파일을 업로드 하여 자료를 만들어요 !</p>
             <div class="voiceContent">
                 <h1>녹음된 파일</h1>
-                <a th:href="@{/file}"><button class="fileButtton">녹음 파일 첨부하기</button></a>
+                <a th:href="@{/file}"><button id="uploadButton" class="fileButtton">녹음 파일 첨부하기</button></a>
             </div>
         </div>
         <div class="voiceContents">
@@ -21,7 +21,7 @@
             <p>지금 녹음 버튼을 눌러 생생한 강의를 녹음하세요 !</p>
             <div class="voiceContent">
                 <h1>새로 녹음하기</h1>
-                <a th:href="@{/all}"><button class="fileButtton">지금 녹음하기</button></a>
+                <a><button onclick="location.href='/rec'" class="fileButtton">지금 녹음하기</button></a>
             </div>
         </div>
     </div>

@@ -20,17 +20,17 @@ public class ConvertPointText {
     private static final String API_KEY = "sk-Qj0JvbXL0ZeNKc7yzs0OK9zUO9F6NU8msdNLZ3gkKyT3BlbkFJdhBpeNfDKY346JM86Scb8oEPsyeC4hG5VM-dsCWNQA"; // OpenAI API 키 설정
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
-    public String p_text() {
-        String text = "안녕하세요, GPT-4를 사용하여 점자로 변환합니다.";
+    public String p_text(String summarizedText) {
+        String text = summarizedText;
 
         try {
             // 1. 텍스트를 점자로 변환하도록 GPT API에 요청
             String brailleText = convertTextToBraille(text);
 
             // 2. 변환된 점자 출력
-            System.out.println("Original Text: " + text);
+
             System.out.println("Braille Text: " + brailleText);
-            return "Original Text: " + text + "Braille Text: " + brailleText;
+            return "Braille Text: " + brailleText;
 
         } catch (IOException e) {
             e.printStackTrace();
