@@ -5,11 +5,10 @@
     <title>mainpage</title>
 </head>
 <body>
-<button id="uploadButton">파일 올리기</button>
-<button onclick="location.href='/rec'">새로 녹음하기</button>
 <input type="file" id="fileInput" accept="audio/mp3" style="display: none;">
 <input type="text" id="filePath" placeholder="선택한 파일 이름" style="width: 300px;" readonly>
 <div id="result" style="margin-top: 20px;"></div> <!-- 결과를 표시할 영역 추가 -->
+<button id="uploadButton">파일 올리기</button>
 
 <script>
     document.getElementById('uploadButton').onclick = () => {
