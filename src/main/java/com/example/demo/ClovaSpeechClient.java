@@ -269,6 +269,15 @@ public class ClovaSpeechClient {
         }
     }
 
+    public String pa_json(String filePath) {
+        final ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient();
+        NestRequestEntity requestEntity = new NestRequestEntity();
+        final String result =  clovaSpeechClient.upload(new File(filePath), requestEntity);
+        //final String result = clovaSpeechClient.url("file URL", requestEntity);
+        //final String result = clovaSpeechClient.objectStorage("test.mp3", requestEntity);
+        return result;
+    }
+
 
 
 }
