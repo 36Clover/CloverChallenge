@@ -24,7 +24,7 @@ public class ChooseController {
     public ResponseEntity<List<Map<String, String>>> uploadAudio(@RequestParam("audio") MultipartFile file) {
         String result;
 
-        String uploadDir = "C:\\Users\\hyoju\\Desktop\\testpath\\";
+        String uploadDir = "C:\\Users\\mdk19\\Desktop\\testpath\\";
         String filePath = uploadDir + file.getOriginalFilename(); // 파일 경로 구성
         // 파일 저장 및 처리 로직
 

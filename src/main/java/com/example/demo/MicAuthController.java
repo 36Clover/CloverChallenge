@@ -38,10 +38,10 @@ public class MicAuthController {
 
         String fileExtension = originalFilename.substring(originalFilename.lastIndexOf('.'));
         String uniqueFilename = UUID.randomUUID().toString() + fileExtension; // 고유한 파일 이름 생성
-        String filePath = "C:\\Users\\hyoju\\Desktop\\testpath\\" + uniqueFilename; // 파일 저장 경로
+        String filePath = "C:\\Users\\mdk19\\Desktop\\testpath\\" + uniqueFilename; // 파일 저장 경로
 
         // 디렉토리 생성 (폴더가 존재하지 않으면 생성)
-        File directory = new File("C:\\Users\\hyoju\\Desktop\\testpath\\");
+        File directory = new File("C:\\Users\\mdk19\\Desktop\\testpath\\");
         if (!directory.exists()) {
             directory.mkdirs(); // 디렉토리 생성
         }
