@@ -9,6 +9,7 @@
 <button onclick="location.href='/rec'">새로 녹음하기</button>
 <input type="file" id="fileInput" accept="audio/mp3" style="display: none;">
 <input type="text" id="filePath" placeholder="선택한 파일 이름" style="width: 300px;" readonly>
+<div id="result" style="margin-top: 20px;"></div> <!-- 결과를 표시할 영역 추가 -->
 
 <script>
     document.getElementById('uploadButton').onclick = () => {
@@ -28,9 +29,11 @@
                 method: 'POST',
                 body: formData
             })
-                .then(response => response.text())
+                .then(response => response.json()) // JSON으로 응답 처리
                 .then(data => {
-                    console.log('서버 응답:', data); // 서버 응답 처리
+                    // 서버 응답에서 텍스트 통합
+                    const resultText = data.map(segment => `${segment.speaker}: ${segment.text}`).join('<br>');
+                    document.getElementById('result').innerHTML = resultText; // 결과 표시
                 })
                 .catch(error => {
                     console.error('파일 업로드 중 오류 발생:', error);
