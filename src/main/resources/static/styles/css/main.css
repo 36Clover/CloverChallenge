@@ -1,0 +1,55 @@
+body{margin: 0px;}
+.bodyContent{display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 700px;}
+.fileTypes{display: flex;
+    align-items: center;
+    width: 90%;
+    justify-content: space-around;}
+.fileType{display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ececec;
+    border-radius: 20px;
+    width: 350px;
+    height: 350px;}
+.fileButtton{width: 250px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #ffa500;
+    border: 0px;}
+
+/* 음성 화면 */
+.bodyContents{    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 700px;
+    justify-content: space-evenly;}
+.voiceContents{    display: flex;
+    align-items: center;
+    height: 200px;
+    width: 70%;
+    background-color: #ececec;
+    justify-content: space-around;
+    border-radius: 20px;
+    margin-bottom: 40px;}
+.voiceContent{display: flex;
+    flex-direction: column;
+    align-items: center;}
+
+/* 파일 제출 화면 */
+.fileContent{    display: flex;
+    flex-direction: column;}
+
+/* 결과 화면 */
+.resultContents{    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    height: 500px;}
+.resultContent{width: 45%;
+    display: flex;
+    border: #dbdbdb 5px solid;
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;}
