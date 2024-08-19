@@ -22,11 +22,12 @@ public class ConvertPdf {
 
     private static final String API_KEY = "sk-Qj0JvbXL0ZeNKc7yzs0OK9zUO9F6NU8msdNLZ3gkKyT3BlbkFJdhBpeNfDKY346JM86Scb8oEPsyeC4hG5VM-dsCWNQA"; // OpenAI API 키 설정
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
+    private static final String BASE_PATH = "C:\\Users\\hyoju\\Desktop\\testpath\\"; // 기본 경로 설정
 
-    public String c_pdf() {
+    public String c_pdf(String fileName) {
         try {
             // 1. PDF 파일을 텍스트로 변환
-            String pdfText = extractTextFromPdf("C:\\Users\\mdk19\\Desktop\\testpdf.pdf");
+            String pdfText = extractTextFromPdf(BASE_PATH + fileName);
 
             // 2. 텍스트를 ChatGPT API로 전송하여 요약 요청
             String summary = summarizeTextWithChatGpt(pdfText);

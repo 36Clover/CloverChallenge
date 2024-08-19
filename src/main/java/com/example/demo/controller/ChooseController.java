@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.ClovaSpeechClient;
+import com.example.demo.gpt_method.ConvertPdf;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +60,19 @@ public class ChooseController {
 
         return ResponseEntity.ok(speakerSegments); // 화자별 인식 결과를 JSON 형태로 반환
     }
+
+    @PostMapping("/convertPost")
+    public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file) {
+        String fileName = file.getOriginalFilename(); // 파일 이름 가져오기
+        ConvertPdf convertPdf = new ConvertPdf();
+
+        // PDF 파일 처리
+        String result = convertPdf.c_pdf(fileName);
+
+        // 결과 반환
+        return ResponseEntity.ok(result);
+    }
+
 
     public String pa_json(String filePath) {
         final ClovaSpeechClient clovaSpeechClient = new ClovaSpeechClient();

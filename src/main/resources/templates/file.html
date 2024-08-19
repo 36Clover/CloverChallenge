@@ -6,54 +6,65 @@
     <link rel="stylesheet" th:href="@{/styles/css/main.css}" />
 </head>
 <body>
-    <div class="bodyContents">
-        <div class="fileContent">
-            <input type="file" id="fileInput" accept="audio/mp3" style="display: none;">
-            <input type="text" id="filePath" placeholder="선택한 파일 이름" style="width: 300px;" readonly>
-<!--            <div id="result" style="margin-top: 20px;"></div> &lt;!&ndash; 결과를 표시할 영역 추가 &ndash;&gt;-->
-            <a><button id="uploadButton" class="fileButtton" type="submit">파일 제출 하기</button></a>
+<div class="bodyContents">
+    <div class="fileContent">
+        <input type="file" id="fileInput" accept=".mp3,.pdf" style="display: none;">
+        <input type="text" id="filePath" placeholder="선택한 파일 이름" style="width: 300px;" readonly>
+        <div id="result" style="margin-top: 20px;"></div> <!-- 결과를 표시할 영역 추가 -->
+        <button id="uploadButton" class="fileButtton" type="submit">파일 제출 하기</button>
+    </div>
+    <div class="fileContent">
+        <div>
+            <p id="sometxt">그래프 삽입</p>
         </div>
-        <div class="fileContent">
-            <div>
-                <p id="sometxt">그래프 삽입</p>
-            </div>
-            <div>
+        <div>
             <a th:href="@{/all}"><button class="fileButtton" type="submit">요점 정리하기</button></a>
             <a th:href="@{/all}"><button class="fileButtton" type="submit">기출 문제 생성하기</button></a>
-            </div>
         </div>
     </div>
+</div>
 
-    <script>
-        document.getElementById('uploadButton').onclick = () => {
-            document.getElementById('fileInput').click(); // 파일 선택 창 열기
-        };
+<script>
+    document.getElementById('uploadButton').onclick = () => {
+        document.getElementById('fileInput').click(); // 파일 선택 창 열기
+    };
 
-        document.getElementById('fileInput').onchange = (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                document.getElementById('filePath').value = file.name; // 파일 이름을 input 필드에 출력
+    document.getElementById('fileInput').onchange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            document.getElementById('filePath').value = file.name; // 파일 이름을 input 필드에 출력
 
-                // 파일 전송을 위한 AJAX 요청
-                const formData = new FormData();
-                formData.append('audio', file); // 'audio'라는 이름으로 파일 추가
+            // 파일 전송을 위한 AJAX 요청
+            const formData = new FormData();
+            formData.append('file', file); // 'file'이라는 이름으로 파일 추가
 
-                fetch('/fileupload', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json()) // JSON으로 응답 처리
-                    .then(data => {
-                        // 서버 응답에서 텍스트 통합
-                        const resultText = data.map(segment => `${segment.speaker}: ${segment.text}`).join('<br>');
-                        document.getElementById('result').innerHTML = resultText; // 결과 표시
-                    })
-                    .catch(error => {
-                        console.error('파일 업로드 중 오류 발생:', error);
-                    });
+            // 파일 형식에 따라 전송할 URL 결정
+            let uploadUrl;
+            if (file.type === 'audio/mpeg') { // MP3 파일
+                uploadUrl = '/fileupload';
+            } else if (file.type === 'application/pdf') { // PDF 파일
+                uploadUrl = '/convertPost'; // PDF 파일을 처리할 URL
+            } else {
+                alert('지원하지 않는 파일 형식입니다.');
+                return;
             }
-        };
-    </script>
+
+            fetch(uploadUrl, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json()) // JSON으로 응답 처리
+                .then(data => {
+                    // 서버 응답에서 텍스트 통합
+                    const resultText = data.map(segment => `${segment.speaker}: ${segment.text}`).join('<br>');
+                    document.getElementById('result').innerHTML = resultText; // 결과 표시
+                })
+                .catch(error => {
+                    console.error('파일 업로드 중 오류 발생:', error);
+                });
+        }
+    };
+</script>
 
 </body>
 </html>
