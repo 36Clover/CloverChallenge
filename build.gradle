@@ -39,6 +39,11 @@ dependencies {
 }
 configurations.all {
 	exclude group: 'commons-logging', module: 'commons-logging'
+	implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.4'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
