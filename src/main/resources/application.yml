@@ -6,9 +6,9 @@ spring:
     cache: false
 
   datasource:
-    url: jdbc:mysql://3.35.227.202:3306/surfer
-    username: clover
-    password: clover
+    url: jdbc:mysql://cloverdb.cbe4g42wmxst.ap-northeast-2.rds.amazonaws.com:3306/surfer
+    username: cloverdb
+    password: cloverdb
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -20,3 +20,8 @@ spring:
 logging:
   level:
     root: INFO
+
+openai:
+  api-url: https://api.openai.com/v1/chat/completions
+  api-key: sk-Qj0JvbXL0ZeNKc7yzs0OK9zUO9F6NU8msdNLZ3gkKyT3BlbkFJdhBpeNfDKY346JM86Scb8oEPsyeC4hG5VM-dsCWNQA
+  model: gpt-4
