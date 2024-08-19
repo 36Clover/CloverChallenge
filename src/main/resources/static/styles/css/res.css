@@ -1,4 +1,4 @@
-/* Reset some basic elements to ensure consistency across browsers */
+/* Reset and basic body styling remains the same */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +6,6 @@
     font-family: 'Arial', sans-serif;
 }
 
-/* Body and basic styling */
 body {
     background-color: #f4f4f9;
     color: #333;
@@ -20,46 +19,27 @@ body {
     margin: 0;
 }
 
-/* Header styling */
-header {
-    width: 100%;
-    background-color: #4CAF50;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-}
-
-header a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Main content area */
+/* Main content styling */
 .bodyContent {
-    margin-top: 100px; /* To prevent overlap with the fixed header */
     text-align: center;
     padding: 20px;
 }
 
 .bodyContent h1 {
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     color: #333;
 }
 
-/* File types container */
-.fileTypes {
+/* Result contents styling */
+.resultContents {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-.fileType {
+.resultContent {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -68,24 +48,26 @@ header a {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.fileType:hover {
+.resultContent:hover {
     transform: translateY(-10px);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.fileType h2 {
+.resultContent h1 {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #4CAF50;
 }
 
-.fileType p {
+.resultContent p {
     font-size: 1em;
     margin-bottom: 20px;
     color: #666;
+    min-height: 80px; /* Adjust as needed */
+    overflow-wrap: break-word; /* Ensure long words break correctly */
 }
 
-/* Button styling */
+/* Button styling remains consistent */
 .fileButtton {
     background-color: #4CAF50;
     color: #fff;
@@ -95,6 +77,8 @@ header a {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .fileButtton:hover {

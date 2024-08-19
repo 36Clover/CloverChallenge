@@ -1,4 +1,4 @@
-/* Reset some basic elements to ensure consistency across browsers */
+/* Reset and basic body styling remains the same */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +6,6 @@
     font-family: 'Arial', sans-serif;
 }
 
-/* Body and basic styling */
 body {
     background-color: #f4f4f9;
     color: #333;
@@ -20,69 +19,55 @@ body {
     margin: 0;
 }
 
-/* Header styling */
-header {
-    width: 100%;
-    background-color: #4CAF50;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-}
-
-header a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Main content area */
+/* Content area styling */
 .bodyContent {
-    margin-top: 100px; /* To prevent overlap with the fixed header */
     text-align: center;
     padding: 20px;
 }
 
 .bodyContent h1 {
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     color: #333;
 }
 
-/* File types container */
-.fileTypes {
+/* Voice content styling */
+.voiceContents {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.fileType {
+    align-items: center;
+    justify-content: center;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 300px;
+    margin-bottom: 20px;
+    width: 600px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.fileType:hover {
+.voiceContents:hover {
     transform: translateY(-10px);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.fileType h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+.voiceContents div:first-child {
+    font-size: 3em;
+    margin-right: 20px;
     color: #4CAF50;
 }
 
-.fileType p {
+.voiceContent h1 {
+    font-size: 1.5em;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+/* Paragraph styling */
+.voiceContents p {
     font-size: 1em;
     margin-bottom: 20px;
     color: #666;
+    flex-grow: 1;
 }
 
 /* Button styling */
@@ -99,4 +84,13 @@ header a {
 
 .fileButtton:hover {
     background-color: #45a049;
+}
+
+/* Specific button styling */
+#uploadButton {
+    background-color: #3b82c4;
+}
+
+#uploadButton:hover {
+    background-color: #346ca5;
 }
