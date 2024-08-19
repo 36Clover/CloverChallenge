@@ -18,11 +18,6 @@ public class ChatController {
         this.openAIService = openAIService;
     }
 
-<<<<<<< Updated upstream
-    @PostMapping("/chat")
-    public String chat(@RequestParam String prompt) {
-        return openAIService.getChatGPTResponse(prompt);
-=======
         @PostMapping("/chat")
         public String chat(@RequestParam String prompt) {
             String str= openAIService.getChatGPTResponse(prompt + "위 요약본을 토대로 문제를 단답형 10 문제와 답은 단어 하나로만 이루어져 있다. question과 answer으로 이루어진 JSON으로 만들어줘");
@@ -44,7 +39,9 @@ public class ChatController {
                     for (JsonNode node : contentNode) {
                         String question = node.path("question").asText();
                         String answer = node.path("answer").asText();
-                       
+                        System.out.println("Question: " + question);
+                        System.out.println("Answer: " + answer);
+                        System.out.println();
                     }
                 }
             } catch (JsonProcessingException e) {
@@ -52,7 +49,6 @@ public class ChatController {
             }
 
             return str;
->>>>>>> Stashed changes
     }
 }
 
