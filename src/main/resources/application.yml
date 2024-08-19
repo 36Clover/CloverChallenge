@@ -17,6 +17,10 @@ spring:
       dialect: org.hibernate.dialect.MySQLDialect
     show-sql: true
 
+  servlet:
+    multipart:
+      enabled: true
+
 logging:
   level:
     root: INFO
