@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.example.demo.controller.ChooseController;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -24,7 +25,7 @@ public class App {
 
     public static void main(String[] args) {
         try {
-            String response = new ClovaSpeechClient().pa_json();
+            String response = new ChooseController().pa_json2();
             Map<String, Object> result = new Gson().fromJson(response, new TypeToken<Map<String, Object>>() {}.getType());
 
             // 화자별 인식 결과 segment 추출

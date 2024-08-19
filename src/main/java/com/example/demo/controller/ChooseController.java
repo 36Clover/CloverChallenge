@@ -18,6 +18,8 @@ import java.util.Map;
 @RestController
 public class ChooseController {
 
+    String result = "";
+
     @RequestMapping(value = "/fileupload", method = RequestMethod.POST)
     public ResponseEntity<List<Map<String, String>>> uploadAudio(@RequestParam("audio") MultipartFile file) {
         String result;
