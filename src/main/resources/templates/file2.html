@@ -10,19 +10,23 @@
     <div class="fileContent">
         <!-- 파일 업로드 폼 -->
         <form id="fileUploadForm" action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" required>
+            <label class="custom-file-upload">
+                <input type="file" name="file" required>
+                파일 선택
+            </label>
         </form>
     </div>
     <div class="fileContent">
-        <div><img src="images/boxloading.gif">
-
-
+        <!-- GIF 이미지, 처음엔 숨겨진 상태 -->
+        <div id="loadingGif" style="display: none;">
+            <img src="images/boxloading.gif" alt="Loading">
+            생성중입니다
         </div>
         <div>
             <!-- 요점 정리하기 버튼 -->
             <button class="fileButton" onclick="submitForm('/result')">요점 정리하기</button>
             <!-- 기출 문제 생성하기 버튼 -->
-            <button class="fileButton" onclick="submitForm('/generate-questions')">기출 문제 생성하기</button>
+            <button class="fileButton" onclick="submitForm('/quize')">기출 문제 생성하기</button>
         </div>
     </div>
 </div>
@@ -30,6 +34,12 @@
 <script>
     function submitForm(action) {
         const form = document.getElementById('fileUploadForm');
+        const loadingGif = document.getElementById('loadingGif');
+
+        // GIF 이미지를 표시
+        loadingGif.style.display = 'block';
+
+        // 폼 제출
         form.action = action;
         form.submit();
     }

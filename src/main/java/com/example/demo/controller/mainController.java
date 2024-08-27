@@ -102,7 +102,7 @@ public class mainController {
                 String sum = new Appli().mk2(summarizedText);
                 ConvertMp converter2 = new ConvertMp();
                 String sum2= converter2.c_mp(sum);
-                String brailleText = new ConvertPointText().p_text(sum);
+                String brailleText = new ConvertPointText().p_text(sum2);
 
                 // 모델에 데이터를 추가
                 model.addAttribute("summarizedText", sum2);
